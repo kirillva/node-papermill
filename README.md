@@ -4,10 +4,10 @@
 
 ## Сборка
 
-`docker build -t papermill-runner:0.0.1 .`
+`docker build -t akrasnov87/papermill-runner:0.0.1 .`
 
 ## Использование
-`docker run -p 5000:5000 -v ./notebooks:/notebooks papermill-runner:0.0.1`
+`docker run -p 5000:5000 -v ./notebooks:/notebooks akrasnov87/papermill-runner:0.0.1`
 
 ### Выполнение (execute)
 
