@@ -34,11 +34,10 @@ def get_file(date, notebook_id, filename):
 def execute_notebook():
     data = request.json
     notebook_id = None
+    output_directory = None
 
-    if data.get('notebook_id') != None:
-        notebook_id = data.get('notebook_id')
-    else:
-        notebook_id = str(uuid.uuid4())
+    FILE_PATH='/files'
+    NOTEBOOK_PATH='/notebooks'
 
     now = None
     if data.get('date') != None:
@@ -49,11 +48,22 @@ def execute_notebook():
     formatted_date_year = now.strftime("%Y")  
     formatted_date_month = now.strftime("%m")
     formatted_date_day = now.strftime("%d")
-    env_path = os.path.join('/notebooks', '.env')
 
-    input_path = os.path.join('/notebooks', data['input'])
-    output_path = os.path.join('/notebooks', 'cache', formatted_date_year, formatted_date_month, formatted_date_day, notebook_id, data['input'])
+    if data.get('notebook_id') != None:
+        notebook_id = data.get('notebook_id')
+    else:
+        notebook_id = str(uuid.uuid4())
 
+    if data.get('output') != None:
+        output_path = os.path.join(FILE_PATH, data.get('output'), data['input'])
+        env_path = os.path.join(FILE_PATH, data.get('output'), '.env')
+        print(env_path)
+    else:
+        output_path = os.path.join(NOTEBOOK_PATH, 'cache', formatted_date_year, formatted_date_month, formatted_date_day, notebook_id, data['input'])
+        env_path = os.path.join(NOTEBOOK_PATH, '.env')
+
+    input_path = os.path.join(NOTEBOOK_PATH, data['input'])
+    
     # Получаем директорию из пути к файлу
     output_directory = os.path.join(os.path.dirname(output_path), 'output')
 

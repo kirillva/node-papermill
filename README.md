@@ -7,7 +7,7 @@
 `docker build -t akrasnov87/papermill-runner:0.0.1 .`
 
 ## Использование
-`docker run -p 5000:5000 -v ./notebooks:/notebooks akrasnov87/papermill-runner:0.0.1`
+`docker run -p 5000:5000 -v ./notebooks:/notebooks --name etl akrasnov87/papermill-runner:0.0.1`
 
 ### Выполнение (execute)
 
@@ -18,7 +18,8 @@ POST /execute
     "input": [имя файла тетрадки с расширением],
     "date": [дата выполнения, можно не указывать, тогда будет текущая],
     "env": [путь к файлу с глобальными переменными, можно не передавать],
-    "notebook_id": [идентификатор, можно не передавать]
+    "notebook_id": [идентификатор, можно не передавать],
+    "output": [выходной каталог, можно не указывать]
 }
 </pre>
 

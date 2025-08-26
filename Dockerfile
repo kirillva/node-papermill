@@ -11,6 +11,8 @@ WORKDIR /app
 
 VOLUME [ "/notebooks" ]
 
+VOLUME [ "/files" ]
+
 COPY app.py /app/app.py
 
 CMD ["gunicorn", "--bind", "0.0.0.0:5000", "app:app"]
