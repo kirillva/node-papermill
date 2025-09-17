@@ -7,16 +7,11 @@ RUN apk add libffi-dev
 COPY requirements.txt .
 RUN pip3 install --no-cache-dir -r requirements.txt
 
-FROM python:3.11.9-alpine3.20 AS final
-
 # Создание рабочей директории
 WORKDIR /app
 
 # Опционально: копирование ноутбуков по умолчанию
 # COPY notebooks /notebooks
-
-COPY ./ ./
-COPY --from=build /usr/local/lib/python3.11/site-packages/ /usr/local/lib/python3.11/site-packages/
 
 VOLUME [ "/notebooks" ]
 
